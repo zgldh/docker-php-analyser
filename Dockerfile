@@ -1,5 +1,7 @@
 FROM zgldh/docker-php-fetcher
 
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+RUN sed -i -e "s/memory_limit\s*=\s*128M/memory_limit = 1024M/g" /etc/php/7.0/fpm/php.ini
 RUN composer global require --no-plugins --no-scripts zgldh/phpcs-base-ruleset sebastian/phpcpd phpmd/phpmd
 RUN composer global update --no-plugins --no-scripts -vvv
 RUN cp -r /root/.composer/vendor /.composer/vendor
